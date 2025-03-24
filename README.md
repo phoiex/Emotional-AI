@@ -1,0 +1,2 @@
+# Emotional-AI
+PIPELINE OF EMOTIONAL AI
