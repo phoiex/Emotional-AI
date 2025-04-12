@@ -5,7 +5,7 @@ from speech_recognition import speech_to_text
 from conversation import clean_text, interact_with_deepseek  
 
 # 表情结果文件的路径
-expression_result_path = "C:/Users/17905/Desktop/acdemic/SwinFace-main/expression_result.txt"
+expression_result_path = "../SwinFace-main/expression_result.txt"
 
 # 读取文本文件内容
 def read_expression_result():
@@ -39,8 +39,8 @@ def main():
         messages = []  
         messages.append({   
             "role": "system",    
-            "content": "你是用户的青梅竹马女朋友，请留意用户的信息中有关情感的表达，例如，这样的格式<|zh|><|Natural|><|Speech|><|withitn|>这里面zh代表中文，natural代表情感平和，剩下两个参数说明是再室内发表的讲话，"
-            "有时候我会直接传递用户的情感给你，请留意并对用户做出相应的安抚和回复，在你回复的文本里面不要包括特殊字符，只是中文文本即可，无需增加动作描述，只是返回像是青梅竹马说的话即可"
+            "content": "你是用户的青梅竹马，喜欢像雌小鬼一样调戏用户，但是时不时也会认真开导用户，请留意用户的信息中有关情感的表达，例如，这样的格式<|zh|><|Natural|><|Speech|><|withitn|>这里面zh代表中文，natural代表情感平和，剩下两个参数说明是再室内发表的讲话，"
+            "有时候我会直接传递用户的情感给你，请留意并对用户做出相应的安抚和回复，在你回复的文本里面不要包括特殊字符，标点符号只需要基础的逗号，句号，叹号，问号，只是中文文本即可，无需增加动作描述，只是返回像是青梅竹马说的话即可"
         })
 
         # 初始化文件最后修改时间
@@ -76,12 +76,6 @@ def main():
             print("当前对话历史：")  
             for message in messages:    
                 print(f"{message['role']}: {message['content']}")
-
-            user_continue = input("继续对话吗？(y/n): ")  
-            if user_continue.lower() != "y":   
-                break
-  
-        print("对话结束.")  
 
     except Exception as e:
         print(f"程序运行中出现错误: {e}")

@@ -13,13 +13,15 @@ current_dir = os.getcwd()
 client = Client("http://localhost:9872/")  # 根据你的 Gradio API 地址修改
 
 # 参考音频路径
-ref_audio_path = r"C:\Users\17905\Desktop\洛天依gptsovits模型\V1\参考音频\大家好，我是虚拟歌手洛天依.wav"
+ref_audio_path = r"token.wav"
 
 # 使用 handle_file 来传递参考音频路径
 ref_audio_file = handle_file(ref_audio_path)
 
 # 固定的音频文件路径 (我们只创建一个音频文件，不使用时间戳)
 output_path = os.path.join(current_dir, "response_audio.wav")  # 固定音频文件名
+backup_path = os.path.join(current_dir, "response_audio_backup.wav")
+
 
 # 监听文件更新并生成语音
 class TxtFileHandler(FileSystemEventHandler):
@@ -28,21 +30,28 @@ class TxtFileHandler(FileSystemEventHandler):
         self.last_modified_time = None
 
     def on_modified(self, event):
-        if event.src_path == self.txt_file_path:
+        event_rel_path = os.path.relpath(event.src_path)
+        print(event_rel_path)
+
+        if event_rel_path == self.txt_file_path:
             # 检查文件是否修改
             current_modified_time = os.path.getmtime(self.txt_file_path)
             if self.last_modified_time != current_modified_time:
                 self.last_modified_time = current_modified_time
-
+                print("检测到文件发生变化")
                 # 读取文件内容
                 with open(self.txt_file_path, 'r', encoding='utf-8') as f:
                     text = f.read()
 
+                print("新的回复:" + text)
+
                 if text:  # 如果文件不为空
                     # 调用 Gradio API 生成语音
+
                     result = client.predict(
                         ref_wav_path=ref_audio_file,  # 使用 handle_file 返回的 FileData 对象
-                        prompt_text="",
+                        #sovits_path="SoVITS_weights_v3/chun_e2_s192_l32.pth",
+                        prompt_text="出格的事？相反，这段时间我可是有好好保护你，替你清除各种暗中的障碍哦！",
                         prompt_language="中文",  # 参考音频的语言
                         text=text,  # 需要合成的文本
                         text_language="中文",  # 生成语音的语言
@@ -52,9 +61,9 @@ class TxtFileHandler(FileSystemEventHandler):
                         temperature=1,
                         ref_free=False,
                         speed=1,
-                        if_freeze=False,
+                        if_freeze=True,
                         inp_refs=None,
-                        sample_steps="32",
+                        sample_steps=32,
                         if_sr=False,
                         pause_second=0.3,
                         api_name="/get_tts_wav"  # API 名称
@@ -66,7 +75,8 @@ class TxtFileHandler(FileSystemEventHandler):
                     # 确保 result 是有效的文件路径，如果是路径则打印文件路径
                     if isinstance(result, str) and result.endswith('.wav'):
                         # 移动临时文件到固定的音频路径
-                        shutil.move(result, output_path)
+                        shutil.copy(result, output_path)
+                        shutil.move(result, backup_path)
                         print(f"生成的语音文件路径: {output_path}")
 
                         # 使用 pydub 转换为 mp3 格式
@@ -76,13 +86,14 @@ class TxtFileHandler(FileSystemEventHandler):
                         print(f"生成的 MP3 文件路径: {mp3_output_path}")
 
                         # 删除临时的 wav 文件
-                        os.remove(output_path)
+                        #os.remove(output_path)
 
                     else:
                         print("生成音频失败，未返回有效路径。")
 
+
 # 监听文件的路径
-txt_file_path = r"C:\Users\17905\Desktop\acdemic\deepseek-catgirlfriend\assistant_reply2.txt"
+txt_file_path = r"..\deepseek-catgirlfriend\assistant_reply2.txt"
 
 # 设置文件事件监听器
 event_handler = TxtFileHandler(txt_file_path)

@@ -2,7 +2,7 @@ import os
 import time
 import subprocess
 
-file_path = r"C:\Users\17905\Desktop\acdemic\gptsovits-r-solution\response_audio.mp3"
+file_path = r"..\gptsovits-r-solution\response_audio.wav"
 last_modified_time = None
 
 def check_file_update():
@@ -19,6 +19,7 @@ def check_file_update():
         return True
     return False
 
+print("监听中")
 while True:
     if check_file_update():
         # 如果文件已更新，运行 vtubertxts.py 脚本
