@@ -1,13 +1,13 @@
 # Emotional-AI 部署过程
 
-下面是 **Emotional-AI** 项目的详细部署步骤，包括从拉取仓库到启动项目以及后续的配置。
+以下是 **Emotional-AI** 项目的详细部署步骤，包括从拉取仓库到启动项目以及后续的配置。
 
 ## 1. 拉取仓库
 
 首先，拉取 `Emotional-AI` 项目的代码。
 
 ```bash
-git clone https://github.com/your-repo/Emotional-AI.git
+git clone https://github.com/<repo>/Emotional-AI.git
 cd Emotional-AI
 ```
 
@@ -25,7 +25,7 @@ conda --version
 
 B站的大佬做的项目，推荐直接下载 GPT-SoVITS 的最新安装包。记得保存解压的位置，因为未来配置时需要使用该路径。
 
-1. **下载 GPT-SoVITS**：访问GitHub 仓库，下载最新的安装包。
+1. **下载 GPT-SoVITS**：访问 GitHub 仓库，下载最新的安装包。
 2. **解压**：解压到自己指定的目录，记住路径。
 
 ## 4. 启动项目
@@ -69,3 +69,58 @@ pip install <缺少的依赖>
 ### 3. 训练音频
 
 如果需要训练音频或进行其他调整，可以参考 B站的教程。
+
+### 4. DeepSeek API
+
+去 `deepseek-catgirlfriend` 目录下修改 `conversation.py` 中的 API 配置。
+
+## 启动过程
+
+### 启动一系列必须的后台服务
+
+#### 1. 手动启动
+
+- 点击 GPT-SoVITS 的 `go-webui.bat`，可以进入网站（localhost:9874）开启 TTS 推理（即 `inference_webui.py`）。
+- 进入 `SenseVoice-main` 目录：
+
+  ```bash
+  conda activate <之前创立好的或者你自己建的>
+  python webui.py
+  ```
+
+- 进入 `gptsovits-r-solution` 目录，注意一定要启动 TTS 推理后才能启动这个服务：
+
+  ```bash
+  conda activate <之前创立好的或者你自己建的>
+  python realtime.py
+  ```
+
+- 进入 `microphone` 目录：
+
+  ```bash
+  conda activate <之前创立好的或者你自己建的>
+  python call.py
+  ```
+
+#### 2. 脚本启动
+
+```bash
+python start_up.py
+```
+
+正常情况下会启动四个终端，分别对应四个服务。如果所有服务都没有报错，部署就成功了。
+
+### 启动对话服务
+
+1. 进入 `deepseek-catgirlfriend` 目录：
+
+   ```bash
+   conda activate <之前创立好的或者你自己建的>
+   python main.py
+   ```
+
+2. 启动 VTube Studio。
+
+通过空格输入，如果流程没有报错，就表示成功了！
+
+---
