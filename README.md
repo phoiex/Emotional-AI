@@ -73,6 +73,7 @@ pip install <缺少的依赖>
 ### 4. DeepSeek API
 
 去 `deepseek-catgirlfriend` 目录下修改 `conversation.py` 中的 API 配置。
+当然你想要用别的AI的API只要稍微改一改就好了
 
 ## 启动过程
 
@@ -118,9 +119,17 @@ python start_up.py
    conda activate <之前创立好的或者你自己建的>
    python main.py
    ```
-
+   
 2. 启动 VTube Studio。
 
 通过空格输入，如果流程没有报错，就表示成功了！
 
 ---
+
+
+## Q&A
+1. 为什么不使用GPT-SoVITE提供的API？
+   没有研究过Gradio，我也不会改
+2. 为什么没有配置SwinFace？
+   我的电脑跑不动会死机（
+   如果你硬要使用的话记得去仓库下载checkpoint_step_79999_gpu_0.pt模型捏
