@@ -49,6 +49,8 @@ conda activate <目标文件夹名>
 pip install <缺少的依赖>
 ```
 
+同时因为还没有配置GPT-SoVITS所以第一个弹窗会启动失败，不用管他继续执行程序就可以了
+
 ## 5. 安装 VTube Studio
 
 1. **VTube Studio 本体**：去 [Steam](https://store.steampowered.com/) 搜索并下载 VTube Studio。
@@ -64,7 +66,7 @@ pip install <缺少的依赖>
 
 ### 2. 配置 `weight.json`
 
-将训练好的 `weight.json` 文件放置在 GPT-SoVITS 的根目录下。这样在未来你训练完模型后，可以直接通过配置文件中的模型启动，不需要再点击浏览器。
+可以创建一个 `weight.json` 文件放置在 GPT-SoVITS 的根目录下。这样在未来你训练完模型后，可以直接通过配置文件中的模型启动，不需要再点击浏览器（需要你训练好的模型路径）
 
 ### 3. 训练音频
 
