@@ -14,7 +14,7 @@ device_info = sd.query_devices(virtual_mic_device_id)
 device_sample_rate = device_info['default_samplerate']
 
 # 定义 MP3 文件的路径
-file_path = r"C:\Users\17905\Desktop\acdemic\gptsovits-r-solution\response_audio.mp3"
+file_path = r"..\gptsovits-r-solution\response_audio.wav"
 
 # 播放音频并打印成功信息
 def play_audio(samples, sample_rate):
@@ -50,7 +50,7 @@ class Mp3FileHandler(FileSystemEventHandler):
     def play_updated_audio(self):
         try:
             # 加载 MP3 文件
-            audio = AudioSegment.from_mp3(self.file_path)
+            audio = AudioSegment.from_wav(self.file_path)
 
             # 打印调试信息
             print(f"加载的音频文件路径：{self.file_path}")

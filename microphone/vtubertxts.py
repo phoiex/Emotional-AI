@@ -10,8 +10,8 @@ device_info = sd.query_devices(virtual_mic_device_id)
 device_sample_rate = device_info['default_samplerate']
 
 # 加载 MP3 文件
-file_path = r"C:\Users\17905\Desktop\acdemic\gptsovits-r-solution\response_audio.mp3"
-audio = AudioSegment.from_mp3(file_path)
+file_path = r"..\gptsovits-r-solution\response_audio.wav"
+audio = AudioSegment.from_wav(file_path)
 
 # 如果需要，将音频采样率转换为设备支持的采样率
 if audio.frame_rate != device_sample_rate:

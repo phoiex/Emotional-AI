@@ -1,25 +1,15 @@
 import re
 # from chattts1 import text_to_speech
-
-
-
 def clean_text(text):
     return text
 
 from openai import OpenAI
 import time
-client = OpenAI(api_key="sk-064484e4389c4f8994de1bf9e975743a", base_url="https://api.deepseek.com")
+client = OpenAI(api_key="sk-b52a7645be8f40458de02539255b8be4", base_url="https://api.deepseek.com")
 import traceback
 
 import re
 # from chattts1 import text_to_speech
-
-def clean_text(text):
-    return text
-
-from openai import OpenAI
-import time
-client = OpenAI(api_key="sk-064484e4389c4f8994de1bf9e975743a", base_url="https://api.deepseek.com")
 import traceback
 
 def interact_with_deepseek(messages):

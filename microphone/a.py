@@ -14,7 +14,7 @@ device_info = sd.query_devices(virtual_mic_device_id)
 device_sample_rate = device_info['default_samplerate']
 
 # 定义 MP3 文件的路径
-file_path = r"C:\Users\17905\Desktop\acdemic\gptsovits-r-solution\response_audio.mp3"
+file_path = r"..\gptsovits-r-solution\response_audio.mp3"
 
 # 播放音频并打印成功信息
 def play_audio(samples, sample_rate):
